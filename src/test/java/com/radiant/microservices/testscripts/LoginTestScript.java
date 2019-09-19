@@ -99,6 +99,8 @@ public class LoginTestScript {
 							login.userNameTxtBox(LoginBtnWebElementObj).click();
 							testCaseDetails.setStatus(Constants.PASS);
 							Thread.sleep(3000);
+							Thread.sleep(10000);
+							System.out.println(driver.getCurrentUrl());
 						}
 					}
 				} else {
