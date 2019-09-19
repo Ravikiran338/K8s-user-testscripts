@@ -48,7 +48,7 @@ public class TNCTest {
 				 loginTestScript = new LoginTestScript(testSuiteDetailsId);
 				 loginTestScript.login();
 				  
-			  /*// Executing the Test script for Banking Menu App
+			  // Executing the Test script for Banking Menu App
 			     bankingAppAddUserTestScript = new BankingAppAddUserTestScript(testSuiteDetailsId);
 			     bankingAppAddUserTestScript.addBankingUser();
 			     
@@ -66,7 +66,7 @@ public class TNCTest {
 			    
 			  // Executing the Test script for Logout
 				 logoutTestScript = new LogoutTestScript(testSuiteDetailsId);
-				 logoutTestScript.logout();*/
+				 logoutTestScript.logout();
 				
 			} 
 		} catch (Exception e) {
