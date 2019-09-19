@@ -24,15 +24,15 @@ public class JWebDriver {
 	private JWebDriver() {
 		//System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "\\Drivers\\geckodriver.exe");
 		String Xport = System.getProperty("lmportal.xvfb.id", ":1");
-        final File firefoxPath = new File(System.getProperty("lmportal.deploy.firefox.path", "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"));
-        FirefoxBinary firefoxBinary = new FirefoxBinary(firefoxPath);
+        //final File firefoxPath = new File(System.getProperty("lmportal.deploy.firefox.path", "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"));
+        //FirefoxBinary firefoxBinary = new FirefoxBinary(firefoxPath);
         Map<String, String> environment = new HashMap();
         environment.put("DISPLAY", Xport);
         GeckoDriverService service = new GeckoDriverService.Builder()        		
         		 .usingDriverExecutable(new File(System.getProperty("user.dir") + "\\Drivers\\geckodriver"))
      	        .usingAnyFreePort().withEnvironment(environment).build();
-        FirefoxOptions option=new FirefoxOptions();
-        option.setBinary(firefoxBinary);
+        //FirefoxOptions option=new FirefoxOptions();
+        //option.setBinary(firefoxBinary);
         driver = new FirefoxDriver(service);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		//System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\Drivers\\chromedriver.exe");
