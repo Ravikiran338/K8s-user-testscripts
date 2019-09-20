@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 
 import com.radiant.microservices.db.TAFDBManagerHelper;
 import com.radiant.microservices.db.TestCaseDetails;
+import com.radiant.microservices.db.TestSuiteDetails;
 import com.radiant.microservices.exceptions.TAFException;
 import com.radiant.microservices.model.WebElementDataDetails;
 import com.radiant.microservices.model.WebElementDetails;
@@ -31,12 +32,13 @@ public class BankingAppMenuTestScript {
 	private TestCaseDetails testCaseDetails = null;
 	BankingAppMenu bankingAppMenu;
 	AppUtil apt = new AppUtil();
-
+	TestSuiteDetails suiteDetails;
 	// ==========================================================================
 
-	public BankingAppMenuTestScript(long testSuiteDetailsId) {
+	public BankingAppMenuTestScript(TestSuiteDetails suiteDetails) {
+		this.suiteDetails= suiteDetails;
 		testCaseDetails = new TestCaseDetails();
-		testCaseDetails.setTestSuiteDetailsId(testSuiteDetailsId);
+		testCaseDetails.setTestSuiteDetailsId(suiteDetails.getTestSuiteDetailsId());
 		System.out.println(testCaseDetails.getTestCaseDetailsId());
 	}
 
@@ -117,7 +119,8 @@ public class BankingAppMenuTestScript {
 									bankingAppMenu.changePasswordMenu(changePasswordMenuBtnobj).click();
 									log.info(" Change Password ");
 								} catch (java.lang.AssertionError e) {
-								} catch (Exception 										 e) {
+								} catch (Exception e) {
+									suiteDetails.setTestStatusSuccess(false);
 									testCaseDetails = new TAFException().handleException(e, testCaseDetails, customMessage);
 								} finally {
 									System.out.println("TEST CAME Thru");
@@ -126,6 +129,7 @@ public class BankingAppMenuTestScript {
 							} 
 
 		} catch (Exception e) {
+			suiteDetails.setTestStatusSuccess(false);
 			testCaseDetails = new TAFException().handleException(e, testCaseDetails, customMessage);
 		}
 	}

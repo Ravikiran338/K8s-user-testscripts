@@ -19,6 +19,7 @@ import org.testng.annotations.Test;
 
 import com.radiant.microservices.db.TAFDBManagerHelper;
 import com.radiant.microservices.db.TestCaseDetails;
+import com.radiant.microservices.db.TestSuiteDetails;
 import com.radiant.microservices.exceptions.TAFException;
 import com.radiant.microservices.model.WebElementDataDetails;
 import com.radiant.microservices.model.WebElementDetails;
@@ -37,12 +38,14 @@ public class BankingAppModifyUserTestScript {
 	private TestCaseDetails testCaseDetails = null;
 	BankingAppUser bankingAppModifyUser;
 	AppUtil apt = new AppUtil();
+	TestSuiteDetails suiteDetails;
 
 	// ==========================================================================
 
-	public BankingAppModifyUserTestScript(long testSuiteDetailsId) {
+	public BankingAppModifyUserTestScript(TestSuiteDetails suiteDetails) {
+		this.suiteDetails = suiteDetails;
 		testCaseDetails = new TestCaseDetails();
-		testCaseDetails.setTestSuiteDetailsId(testSuiteDetailsId);
+		testCaseDetails.setTestSuiteDetailsId(suiteDetails.getTestSuiteDetailsId());
 		System.out.println(testCaseDetails.getTestCaseDetailsId());
 	}
 
@@ -215,8 +218,10 @@ public class BankingAppModifyUserTestScript {
 					log.info(" Unable to execute the script as some or all the mandatory objects or values are null");
 				}
 			} catch (java.lang.AssertionError e) {
+				suiteDetails.setTestStatusSuccess(false);
 				testCaseDetails = new TAFException().handleException(e, testCaseDetails, customMessage);
 			} catch (Exception e) {
+				suiteDetails.setTestStatusSuccess(false);
 				testCaseDetails = new TAFException().handleException(e, testCaseDetails, customMessage);
 			} finally {
 				TAFDBManagerHelper.getInstance().saveTestCaseDetails(testCaseDetails);

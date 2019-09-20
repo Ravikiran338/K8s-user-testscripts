@@ -23,13 +23,12 @@ public class TNCTest {
 	protected transient final Log log = LogFactory.getLog(getClass());
 	private TestSuiteDetails testSuiteDetails = null;
 
-	
 	// ==========================================================================
 	@Test
-	public void tncTestSuite() {
+	public void tncTestSuite() throws Exception {
 		log.info("START of the method tncTestSuite");
 		long testSuiteDetailsId = 0;
-		
+
 		LoginTestScript loginTestScript = null;
 		BankingAppMenuTestScript bankingAppMenuTestScript = null;
 		BankingAppAddUserTestScript bankingAppAddUserTestScript = null;
@@ -37,40 +36,40 @@ public class TNCTest {
 		BankingAppDeleteUserTestScript bankingAppDeleteUserTestScript = null;
 		LogoutTestScript logoutTestScript = null;
 
-		try {
-			// Adding test Suite details and getting test suite ID
-			testSuiteDetails = TAFDBManagerHelper.getInstance().saveTestSuiteDetails(getClass().getSimpleName());
+		// Adding test Suite details and getting test suite ID
+		testSuiteDetails = TAFDBManagerHelper.getInstance().saveTestSuiteDetails(getClass().getSimpleName());
 
-			if (testSuiteDetails != null && testSuiteDetails.getTestSuiteDetailsId() > 0) {
-				testSuiteDetailsId = testSuiteDetails.getTestSuiteDetailsId();
+		if (testSuiteDetails != null && testSuiteDetails.getTestSuiteDetailsId() > 0) {
+			testSuiteDetailsId = testSuiteDetails.getTestSuiteDetailsId();
 
-			  // Executing the Test script for Login
-				 loginTestScript = new LoginTestScript(testSuiteDetailsId);
-				 loginTestScript.login();
-				  
-			  /*// Executing the Test script for Banking Menu App
-			     bankingAppAddUserTestScript = new BankingAppAddUserTestScript(testSuiteDetailsId);
-			     bankingAppAddUserTestScript.addBankingUser();
-			     
-			  // Executing the Test script for Banking Modify User Test Script
-			     bankingAppModifyUserTestScript = new BankingAppModifyUserTestScript(testSuiteDetailsId);
-			     bankingAppModifyUserTestScript.modifyBankingUser();
-				
-			  // Executing the Test script for Banking Delete User Test Script	
-			     bankingAppDeleteUserTestScript = new BankingAppDeleteUserTestScript(testSuiteDetailsId);
-			     bankingAppDeleteUserTestScript.deleteBankingUser();
-				
-			  // Executing the Test script for Banking Menu App
-			     bankingAppMenuTestScript = new BankingAppMenuTestScript(testSuiteDetailsId);
-			     bankingAppMenuTestScript.chkBankingAppMenu();
-			    
-			  // Executing the Test script for Logout
-				 logoutTestScript = new LogoutTestScript(testSuiteDetailsId);
-				 logoutTestScript.logout();*/
-				
-			} 
-		} catch (Exception e) {
-			log.error("PROBLEM in the method tncTestSuite");
+			// Executing the Test script for Login
+			loginTestScript = new LoginTestScript(testSuiteDetails);
+			loginTestScript.login();
+
+			// Executing the Test script for Banking Menu App
+			/*bankingAppAddUserTestScript = new BankingAppAddUserTestScript(testSuiteDetails);
+			bankingAppAddUserTestScript.addBankingUser();
+
+			// Executing the Test script for Banking Modify User Test Script
+			bankingAppModifyUserTestScript = new BankingAppModifyUserTestScript(testSuiteDetails);
+			bankingAppModifyUserTestScript.modifyBankingUser();
+
+			// Executing the Test script for Banking Delete User Test Script
+			bankingAppDeleteUserTestScript = new BankingAppDeleteUserTestScript(testSuiteDetails);
+			bankingAppDeleteUserTestScript.deleteBankingUser();
+
+			// Executing the Test script for Banking Menu App
+			bankingAppMenuTestScript = new BankingAppMenuTestScript(testSuiteDetails);
+			bankingAppMenuTestScript.chkBankingAppMenu();
+
+			// Executing the Test script for Logout logoutTestScript = new
+			logoutTestScript = new LogoutTestScript(testSuiteDetails);
+			logoutTestScript.logout();*/
+
+			if (!testSuiteDetails.isTestStatusSuccess()) {
+				throw new Exception("Test case Failed");
+			}
+
 		}
 		log.info("END of the method tncTestSuite");
 	}
@@ -81,6 +80,6 @@ public class TNCTest {
 	public void sendReport() {
 		ReportsManager.getInstance().sendTestReport(testSuiteDetails);
 	}
-	
+
 	// ==========================================================================
 }

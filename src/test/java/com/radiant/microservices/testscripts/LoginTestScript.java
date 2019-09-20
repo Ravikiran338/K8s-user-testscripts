@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
@@ -17,6 +18,7 @@ import org.testng.annotations.Test;
 import com.radiant.microservices.common.Constants;
 import com.radiant.microservices.db.TAFDBManagerHelper;
 import com.radiant.microservices.db.TestCaseDetails;
+import com.radiant.microservices.db.TestSuiteDetails;
 import com.radiant.microservices.exceptions.TAFException;
 import com.radiant.microservices.model.WebElementDataDetails;
 import com.radiant.microservices.model.WebElementDetails;
@@ -32,12 +34,14 @@ public class LoginTestScript {
 	private List<WebElementDataDetails> webElementsData = null; 
 	private TestCaseDetails testCaseDetails = null;
 	AppUtil apt = new AppUtil();
+	TestSuiteDetails suiteDetails;
 
 	// ==========================================================================
 	
-	public LoginTestScript(long testSuiteDetailsId) {
+	public LoginTestScript(TestSuiteDetails testSuiteDetails) {
+		this.suiteDetails = testSuiteDetails;
 		testCaseDetails = new TestCaseDetails();
-		testCaseDetails.setTestSuiteDetailsId(testSuiteDetailsId);
+		testCaseDetails.setTestSuiteDetailsId(testSuiteDetails.getTestSuiteDetailsId());
 	}
 
 	// ==========================================================================
@@ -98,7 +102,8 @@ public class LoginTestScript {
 							WebElementDetails LoginBtnWebElementObj = webElementsList.get(2);
 							login.userNameTxtBox(LoginBtnWebElementObj).click();
 							testCaseDetails.setStatus(Constants.PASS);
-							Thread.sleep(3000);
+							Thread.sleep(10000);
+							System.out.println(driver.getCurrentUrl());
 						}
 					}
 				} else {
@@ -108,9 +113,12 @@ public class LoginTestScript {
 			} else {
 				log.info(" Unable to execute the script as some or all the mandatory objects or values are null");
 			}
+			//Assert.assertTrue("Assertion Failed",false);
 		} catch (java.lang.AssertionError e) {
+			suiteDetails.setTestStatusSuccess(false);
 			testCaseDetails = new TAFException().handleException(e, testCaseDetails, customMessage);
 		} catch (Exception e) {
+			suiteDetails.setTestStatusSuccess(false);
 			testCaseDetails = new TAFException().handleException(e, testCaseDetails, customMessage);
 		} finally {
 			TAFDBManagerHelper.getInstance().saveTestCaseDetails(testCaseDetails);
