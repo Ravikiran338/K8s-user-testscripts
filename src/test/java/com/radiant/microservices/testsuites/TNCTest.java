@@ -47,7 +47,7 @@ public class TNCTest {
 			loginTestScript.login();
 
 			// Executing the Test script for Banking Menu App
-			/*bankingAppAddUserTestScript = new BankingAppAddUserTestScript(testSuiteDetails);
+			bankingAppAddUserTestScript = new BankingAppAddUserTestScript(testSuiteDetails);
 			bankingAppAddUserTestScript.addBankingUser();
 
 			// Executing the Test script for Banking Modify User Test Script
@@ -64,7 +64,7 @@ public class TNCTest {
 
 			// Executing the Test script for Logout logoutTestScript = new
 			logoutTestScript = new LogoutTestScript(testSuiteDetails);
-			logoutTestScript.logout();*/
+			logoutTestScript.logout();
 
 			if (!testSuiteDetails.isTestStatusSuccess()) {
 				throw new Exception("Test case Failed");
