@@ -47,7 +47,7 @@ public class TNCTest {
 			loginTestScript.login();
 
 			// Executing the Test script for Banking Menu App
-			bankingAppAddUserTestScript = new BankingAppAddUserTestScript(testSuiteDetails);
+			/*bankingAppAddUserTestScript = new BankingAppAddUserTestScript(testSuiteDetails);
 			bankingAppAddUserTestScript.addBankingUser();
 
 			// Executing the Test script for Banking Modify User Test Script
@@ -56,7 +56,7 @@ public class TNCTest {
 
 			// Executing the Test script for Banking Delete User Test Script
 			bankingAppDeleteUserTestScript = new BankingAppDeleteUserTestScript(testSuiteDetails);
-			bankingAppDeleteUserTestScript.deleteBankingUser();
+			bankingAppDeleteUserTestScript.deleteBankingUser();*/
 
 			// Executing the Test script for Banking Menu App
 			bankingAppMenuTestScript = new BankingAppMenuTestScript(testSuiteDetails);
