@@ -29,7 +29,7 @@ public class JWebDriver {
         Map<String, String> environment = new HashMap();
         environment.put("DISPLAY", Xport);
         GeckoDriverService service = new GeckoDriverService.Builder()        		
-        		 .usingDriverExecutable(new File(System.getProperty("user.dir") + "\\Drivers\\geckodriver"))
+        		 .usingDriverExecutable(new File(System.getProperty("user.dir") + "/drivers/geckodriver"))
      	        .usingAnyFreePort().withEnvironment(environment).build();
         /*FirefoxOptions option=new FirefoxOptions();
         option.setBinary(firefoxBinary);*/
