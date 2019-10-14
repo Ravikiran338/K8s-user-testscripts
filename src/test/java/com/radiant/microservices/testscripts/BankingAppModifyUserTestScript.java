@@ -84,7 +84,7 @@ public class BankingAppModifyUserTestScript {
 			driver = JWebDriver.getInstance().getWebDriver();
 			ResourceBundle resourceBundle = ResourceBundle.getBundle("ApplicationResources");
 			driver.get(resourceBundle.getString("application.url"));
-			
+			Thread.sleep(6000);
 			
 			customMessage = "Click on Add button";
 			WebElementDetails userMenuobj = bankingAppModifyUserWebElementList.get(14);
@@ -109,6 +109,7 @@ public class BankingAppModifyUserTestScript {
 									int selctedRecordNo = 0;
 									List<WebElement> rows = lookupTable
 											.findElements(By.cssSelector(rowsObj.getCssSelector()));
+									Thread.sleep(6000);
 									String DomainId = null;
 									JavascriptExecutor js = (JavascriptExecutor) driver;
 									for (int i = 1; i <= rows.size(); i++) {

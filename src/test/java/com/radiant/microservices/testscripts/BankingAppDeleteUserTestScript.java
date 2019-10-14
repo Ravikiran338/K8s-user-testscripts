@@ -100,7 +100,7 @@ public class BankingAppDeleteUserTestScript {
 							List<String> dataSet = webElementDataDetails.getDataSet();
 							if (dataSet != null && dataSet.size() > 0) {
 									Actions act = new Actions(driver);
-									Thread.sleep(10000);
+									Thread.sleep(6000);
 
 									customMessage = "select all records from look-up";
 									WebElementDetails lookupTableObj = bankingAppDeleteUserWebElementList.get(15);
@@ -110,13 +110,15 @@ public class BankingAppDeleteUserTestScript {
 									int selctedRecordNo = 0;
 									List<WebElement> rows = lookupTable
 											.findElements(By.cssSelector(rowsObj.getCssSelector()));
+									Thread.sleep(6000);
 									String DomainId = null;
 									JavascriptExecutor js = (JavascriptExecutor) driver;
 									for (int i = 1; i <= rows.size(); i++) {
 										  if ((i % 10) == 0)
 										  {
 											    js.executeScript("window.scrollBy(0,1000)");
-											    rows.get(i).click();
+											 //   rows.get(i).click();
+											    Thread.sleep(3000);
 										  }		
 										  List<WebElement> cols = rows.get(i).findElements(By.cssSelector("td"));
 										  DomainId = cols.get(2).getText();
